@@ -139,7 +139,7 @@ describe('sanitizeHtml', function() {
     assert.equal(sanitizeHtml('<ol><li>Hello world</li></ol>', { transformTags: { ol: 'ul' } }), '<ul><li>Hello world</li></ul>');
   });
   it('should ignore the custom moo tag', function() {
-    assert.equal(sanitizeHtml('<moo><li>Hello world</li></moo>', { ignoredTags: ['moo'] }), '<moo><li>Hello world</li></moo>');
+    assert.equal(sanitizeHtml('<moo><li>Hello world</li></moo>', { ignoredTags: [ 'moo' ] }), '<moo><li>Hello world</li></moo>');
   });
   it('should replace ol to ul and add class attribute with foo value', function() {
     assert.equal(sanitizeHtml('<ol><li>Hello world</li></ol>', {
