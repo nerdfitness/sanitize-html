@@ -205,6 +205,7 @@ function sanitizeHtml(html, options, _recursing) {
       stack.push(frame);
 
       let skip = false;
+
       const hasText = !!frame.text;
       let transformedTag;
       if (has(transformTagsMap, name)) {
@@ -231,7 +232,7 @@ function sanitizeHtml(html, options, _recursing) {
         }
       }
 
-      if ((options.allowedTags && options.allowedTags.indexOf(name) === -1) || (options.disallowedTagsMode === 'recursiveEscape' && !isEmptyObject(skipMap)) || (options.nestingLimit != null && depth >= options.nestingLimit)) {
+      if ((options.ignoredTags.indexOf(name)) && ((options.allowedTags && options.allowedTags.indexOf(name) === -1) || (options.disallowedTagsMode === 'recursiveEscape' && !isEmptyObject(skipMap)) || (options.nestingLimit != null && depth >= options.nestingLimit))) {
         skip = true;
         skipMap[depth] = true;
         if (options.disallowedTagsMode === 'discard') {
@@ -691,6 +692,7 @@ sanitizeHtml.defaults = {
     'caption', 'col', 'colgroup', 'table', 'tbody', 'td', 'tfoot', 'th',
     'thead', 'tr'
   ],
+  ignoredTags: [],
   disallowedTagsMode: 'discard',
   allowedAttributes: {
     a: [ 'href', 'name', 'target' ],
